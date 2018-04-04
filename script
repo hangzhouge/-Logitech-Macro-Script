@@ -1,0 +1,17 @@
+--罗技鼠标的宏启动的按键代码为1左键、2右键、3中键、4返回键、5前进键、6789自己试吧
+MacroStarted = false;
+function OnEvent(event, arg, family)
+    restartMacro("X1", 5, event, arg); --X1为宏名字
+    restartMacro("X2", 4, event, arg); --X1为宏名字
+end
+function restartMacro(MacroName, MacroKey, event, arg)
+    if (event == "MOUSE_BUTTON_RELEASED" and arg == MacroKey) then
+        if not (MacroStarted) then
+            PlayMacro(MacroName); --启动宏
+            MacroStarted = true; --宏已启动
+        else
+            AbortMacro(); --停止宏
+            MacroStarted = false; --宏已停止
+        end
+    end
+end
